@@ -1,0 +1,13 @@
+# Replace the shipped DeepSeek-official search backend with follow-search.
+# Whole-config replacement of the `web` row restates fetchProvider.
+- insert:
+    - id: web-search-follow
+      name: dsh-web-search-follow
+
+- id: web
+  config:
+    searchProvider: follow-search
+    fetchProvider: http
+
+- id: web-search-deepseek
+  disabled: true

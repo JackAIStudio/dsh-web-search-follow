@@ -1,0 +1,45 @@
+{
+  "name": "dsh-web-search-follow",
+  "version": "0.2.0",
+  "private": true,
+  "description": "DSH web_search backend that follows the current session model. Supports Grok, Gemini (Google Search), and DeepSeek native search.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "parse.js",
+    "deepseek.js",
+    "cordis.patch.yml",
+    "LICENSE",
+    "README.zh.md",
+    "AGENTS.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JackAIStudio/dsh-web-search-follow.git"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "web-search",
+    "grok"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  }
+}
