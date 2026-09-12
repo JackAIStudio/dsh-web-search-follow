@@ -16,6 +16,7 @@
     "deepseek.js",
     "cordis.patch.yml",
     "LICENSE",
+    "README.md",
     "README.zh.md",
     "AGENTS.md"
   ],
@@ -36,7 +37,9 @@
     "dsh-plugin",
     "deepseek-harness",
     "web-search",
-    "grok"
+    "grok",
+    "gemini",
+    "deepseek"
   ],
   "license": "MIT",
   "engines": {
