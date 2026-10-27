@@ -1,10 +1,14 @@
 export const PROVIDER_ID = "follow-search";
 export const GROK_NATIVE_SEARCH_SERVICE = "grokNativeSearch";
 export const GEMINI_NATIVE_SEARCH_SERVICE = "geminiNativeSearch";
+export const WORKBUDDY_NATIVE_SEARCH_SERVICE = "workbuddyNativeSearch";
+export const WORKBUDDY_NATIVE_FETCH_SERVICE = "workbuddyNativeFetch";
 
 export const GROK_PROVIDER = "grok";
 export const GEMINI_PROVIDER = "gemini-oauth";
 export const DEEPSEEK_PROVIDER = "deepseek";
+export const WORKBUDDY_CN_PROVIDER = "workbuddy-cn";
+export const WORKBUDDY_GLOBAL_PROVIDER = "workbuddy-global";
 
 export function isGrokProvider(provider) {
   return provider === "grok" || provider === "llm-grok";
@@ -16,6 +20,21 @@ export function isGeminiProvider(provider) {
 
 export function isDeepSeekProvider(provider) {
   return provider === "deepseek" || provider === "llm-deepseek" || provider === "deepseek-official";
+}
+
+/**
+ * WorkBuddy models: the plugin hosts them behind its own provider ids, and the
+ * same sign-in authorises its `/agenttool` search and fetch endpoints.
+ */
+export function isWorkBuddyProvider(provider) {
+  return provider === WORKBUDDY_CN_PROVIDER || provider === WORKBUDDY_GLOBAL_PROVIDER;
+}
+
+/** Region of a WorkBuddy provider id; undefined for any other provider. */
+export function workBuddyRegionOf(provider) {
+  if (provider === WORKBUDDY_CN_PROVIDER) return "cn";
+  if (provider === WORKBUDDY_GLOBAL_PROVIDER) return "global";
+  return undefined;
 }
 
 function asRecord(value) {
@@ -136,9 +155,17 @@ export function geminiNativeSearchOf(ctx) {
   return ctx?.get?.(GEMINI_NATIVE_SEARCH_SERVICE) ?? ctx?.[GEMINI_NATIVE_SEARCH_SERVICE];
 }
 
+export function workBuddyNativeSearchOf(ctx) {
+  return ctx?.get?.(WORKBUDDY_NATIVE_SEARCH_SERVICE) ?? ctx?.[WORKBUDDY_NATIVE_SEARCH_SERVICE];
+}
+
+export function workBuddyNativeFetchOf(ctx) {
+  return ctx?.get?.(WORKBUDDY_NATIVE_FETCH_SERVICE) ?? ctx?.[WORKBUDDY_NATIVE_FETCH_SERVICE];
+}
+
 export function unsupportedRouteMessage(route) {
   if (route === null) {
-    return "follow-search: no current model is selected; pick a model first. Follow-search supports Grok, Gemini (Google Search), and DeepSeek.";
+    return "follow-search: no current model is selected; pick a model first. Follow-search supports Grok, Gemini (Google Search), DeepSeek, and WorkBuddy (CN/Global).";
   }
-  return `follow-search: provider "${route.provider}" has no native search adapter yet (supported: Grok, Gemini, DeepSeek). Do not fall back across unrelated providers. Use browser_* if you need the web.`;
+  return `follow-search: provider "${route.provider}" has no native search adapter yet (supported: Grok, Gemini, DeepSeek, WorkBuddy CN/Global). Do not fall back across unrelated providers. Use browser_* if you need the web.`;
 }

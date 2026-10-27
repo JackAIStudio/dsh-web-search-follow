@@ -1,8 +1,8 @@
 {
   "name": "dsh-web-search-follow",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
-  "description": "DSH web_search backend that follows the current session model. Supports Grok, Gemini (Google Search), and DeepSeek native search.",
+  "description": "DSH web_search backend that follows the current session model. Supports Grok, Gemini (Google Search), DeepSeek native search, and WorkBuddy CN/Global hosted search + fetch.",
   "type": "module",
   "main": "./index.js",
   "exports": {
